@@ -259,7 +259,44 @@ class Draw {
     }
 
     // 多行文本
-    const chars = text.split('')
+    function groupStrings(inputString) {
+      const groups = [];
+      let currentGroup = '';
+      const isChineseChar = (char) => char.match(/[\u4e00-\u9fa5]/); // 判断是否是中文字符
+    
+      for (let i = 0; i < inputString.length; i++) {
+        const char = inputString[i];
+    
+        if (isChineseChar(char)) {
+          // 对于中文字符，将当前非空的非中文字符组加入结果，并重置 currentGroup
+          if (currentGroup !== '') {
+            groups.push(currentGroup);
+          }
+          groups.push(char);
+          currentGroup = '';
+        } else if (/[a-zA-Z']/.test(char)) {
+          // 对于英文字符和单引号，将其添加到当前组
+          currentGroup += char;
+        } else if (/\s/.test(char)) {
+          // 对于空格，将当前非空的非中文字符组加入结果，并重置 currentGroup，然后添加空格
+          if (currentGroup !== '') {
+            groups.push(currentGroup);
+          }
+          currentGroup = '';
+          groups.push(char);
+        }
+    }
+    
+      // 处理最后一个非中文字符组
+      if (currentGroup !== '') {
+        groups.push(currentGroup);
+      }
+    
+      return groups;
+    }
+
+    // 多行文本
+    const chars = groupStrings(text);
     const _y = y
 
     // 逐行绘制
