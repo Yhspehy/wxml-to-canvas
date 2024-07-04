@@ -13,6 +13,7 @@
 5. 图片支持 mode 属性(aspectFit, aspectFill)
 6. 新增 text，image，view 的 shadow css 属性，当在 image 上使用时，需要传递 clip 属性为 false，否则会裁剪图片
 7. 新增 ellipsis, shadow 的 demo
+8. 修复text英文单词换行折断问题
 
 [![](https://img.shields.io/npm/v/wxml-to-canvas)](https://www.npmjs.com/package/wxml-to-canvas-enhanced)
 [![](https://img.shields.io/npm/l/wxml-to-canvas)](https://github.com/wechat-miniprogram/wxml-to-canvas)
